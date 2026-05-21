@@ -1,7 +1,21 @@
 <?php
 class User {
     private static function connect() {
-        return new PDO("mysql:host=localhost;dbname=game_inventory;charset=utf8", "root", "");
+        $host = getenv('MYSQLHOST') ?: 'localhost';
+        $port = getenv('MYSQLPORT') ?: '3306';
+        $user = getenv('MYSQLUSER') ?: 'root';
+        $pass = getenv('MYSQLPASSWORD') ?: '';
+        $dbname = getenv('MYSQLDATABASE') ?: 'game_inventory';
+        
+        return new PDO(
+            "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8",
+            $user,
+            $pass,
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]
+        );
     }
 
     public static function findByUsername($username) {
