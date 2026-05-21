@@ -1,0 +1,10 @@
+{
+  "name": "game-inventory/system",
+  "description": "Game Store Inventory Management System",
+  "require": {
+    "php": "^8.0"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "^v213.0"
+  }
+}
